@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_inventory">
+
+    <fragment
+        android:id="@+id/navigation_inventory"
+        android:name="com.tdn.apotik_kasir.ui.inventory.InventoryFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_inventory" />
+    <fragment
+        android:id="@+id/navigation_addItem"
+        android:name="com.tdn.apotik_kasir.ui.inventory.NewItemFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_new_item" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.tdn.apotik_kasir.ui.notification.NotificationFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.tdn.apotik_kasir.ui.settings.SettingFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_setting" />
+</navigation>
