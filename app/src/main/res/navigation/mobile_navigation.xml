@@ -3,28 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_inventory">
+    app:startDestination="@+id/navigation_home">
 
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.tdn.apotik_kasir.ui.inventory.InventoryFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_inventory"
         android:name="com.tdn.apotik_kasir.ui.inventory.InventoryFragment"
-        android:label="@string/title_home"
+        android:label="Inventory"
         tools:layout="@layout/fragment_inventory" />
     <fragment
         android:id="@+id/navigation_addItem"
         android:name="com.tdn.apotik_kasir.ui.inventory.NewItemFragment"
-        android:label="@string/title_home"
+        android:label="Tambahkan Obat Baru"
         tools:layout="@layout/fragment_new_item" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_notifications"
         android:name="com.tdn.apotik_kasir.ui.notification.NotificationFragment"
-        android:label="@string/title_dashboard"
+        android:label="Notifikasi"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_settings"
         android:name="com.tdn.apotik_kasir.ui.settings.SettingFragment"
-        android:label="@string/title_notifications"
+        android:label="Pengaturan"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/navigation_suplier"
+        android:name="com.tdn.apotik_kasir.ui.suplier.SuplierFragment"
+        android:label="Pengaturan"
+        tools:layout="@layout/fragment_suplier" />
+    <fragment
+        android:id="@+id/navigation_addsuplier"
+        android:name="com.tdn.apotik_kasir.ui.suplier.NewSuplierFragment"
+        android:label="Tambahkan Suplier Baru"
+        tools:layout="@layout/fragment_new_suplier" />
+
+    <fragment
+        android:id="@+id/navigation_transaction"
+        android:name="com.tdn.apotik_kasir.ui.transaction.TransactionFragment"
+        android:label="Transaksi"
+        tools:layout="@layout/fragment_transaction" />
+    <fragment
+        android:id="@+id/navigation_addnewtransaction"
+        android:name="com.tdn.apotik_kasir.ui.transaction.NewTransactionFragment"
+        android:label="Tambahkan Suplier Baru"
+        tools:layout="@layout/fragment_new_transaction" />
 </navigation>
