@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
     </data>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.auth.LoginActivity">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center||center_horizontal"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_16"
             android:orientation="vertical">
+
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="96dp"
-                android:layout_marginEnd="24dp"
                 android:hint="@string/prompt_email"
                 android:inputType="textEmailAddress"
-                android:selectAllOnFocus="true"/>
+                android:autofillHints=""
+                android:selectAllOnFocus="true"
+                android:layout_marginBottom="@dimen/sp_20" />
 
             <EditText
                 android:id="@+id/password"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
                 android:hint="@string/prompt_password"
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionDone"
+                android:autofillHints=""
                 android:inputType="textPassword"
-                android:selectAllOnFocus="true" />
+                android:selectAllOnFocus="true"
+                android:layout_marginBottom="@dimen/dp_50" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="48dp"
+                android:layout_gravity="center"
                 android:layout_marginBottom="64dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:enabled="false"
-                android:text="@string/action_sign_in" />
+                android:text="@string/action_sign_in"
+                android:textColor="@color/putih" />
 
             <ProgressBar
                 android:id="@+id/loading"

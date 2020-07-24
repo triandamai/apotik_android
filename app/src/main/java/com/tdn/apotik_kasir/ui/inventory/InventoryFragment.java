@@ -1,5 +1,6 @@
 package com.tdn.apotik_kasir.ui.inventory;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class InventoryFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(InventoryViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
         // TODO: Use the ViewModel
     }
 

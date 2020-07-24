@@ -9,6 +9,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.apotik_kasir.core.callback.AuthListener;
 import com.tdn.apotik_kasir.ui.auth.LoginViewModel;
+import com.tdn.apotik_kasir.ui.home.HomeViewModel;
+import com.tdn.apotik_kasir.ui.inventory.InventoryViewModel;
+import com.tdn.apotik_kasir.ui.inventory.NewItemViewModel;
+import com.tdn.apotik_kasir.ui.notification.NotificationViewModel;
+import com.tdn.apotik_kasir.ui.settings.SettingViewModel;
+import com.tdn.apotik_kasir.ui.suplier.SuplierViewModel;
+import com.tdn.apotik_kasir.ui.transaction.NewTransactionViewModel;
 
 public class VMFactory implements ViewModelProvider.Factory {
     private Context context;
@@ -26,7 +33,6 @@ public class VMFactory implements ViewModelProvider.Factory {
     }
 
 
-
     public VMFactory(@NonNull Context context, ActionListener actionListener, String id) {
         this.context = context;
         this.actionListener = actionListener;
@@ -39,7 +45,21 @@ public class VMFactory implements ViewModelProvider.Factory {
     @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(LoginViewModel.class)) {
-            return (T) new LoginViewModel(context, actionListener);
+            return (T) new LoginViewModel(context, authListener);
+        } else if (modelClass.isAssignableFrom(HomeViewModel.class)) {
+            return (T) new HomeViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(InventoryViewModel.class)) {
+            return (T) new InventoryViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(NewItemViewModel.class)) {
+            return (T) new NewItemViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(NotificationViewModel.class)) {
+            return (T) new NotificationViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(SettingViewModel.class)) {
+            return (T) new SettingViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(SuplierViewModel.class)) {
+            return (T) new SuplierViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(NewTransactionViewModel.class)) {
+            return (T) new NewTransactionViewModel(context, actionListener);
         } else {
             throw new IllegalArgumentException("Unknown ViewModel class");
         }
