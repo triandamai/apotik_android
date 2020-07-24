@@ -1,7 +1,6 @@
 package com.tdn.apotik_kasir.core;
 
 import android.content.Context;
-import android.view.ViewManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.apotik_kasir.core.callback.AuthListener;
 import com.tdn.apotik_kasir.ui.auth.LoginViewModel;
-import com.tdn.domain.model.UserModel;
 
 public class VMFactory implements ViewModelProvider.Factory {
     private Context context;

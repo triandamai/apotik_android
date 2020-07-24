@@ -1,18 +1,11 @@
 package com.tdn.data.repository;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.tdn.Static;
 import com.tdn.data.service.ApiService;
-
-import com.tdn.domain.model.UserModel;
 
 
 import io.realm.Realm;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.tdn.data.service.ApiHandler.cek;
 
