@@ -1,24 +1,24 @@
-package com.tdn.domain.serialize.req;
+package com.tdn.domain.object;
 
 import com.google.gson.annotations.SerializedName;
-import com.tdn.domain.model.ObatModel;
-import com.tdn.domain.object.ObatObject;
 
-public class ObatData {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
-    @SerializedName("obat_jual")
+public class ObatObject extends RealmObject {
+
     private String obatJual;
 
-    @SerializedName("obat_stok")
+
     private String obatStok;
 
-    @SerializedName("obat_nama")
+
     private String obatNama;
 
-    @SerializedName("obat_id")
+    @PrimaryKey
     private String obatId;
 
-    @SerializedName("obat_beli")
+
     private String obatBeli;
 
     public void setObatJual(String obatJual) {
@@ -61,20 +61,10 @@ public class ObatData {
         return obatBeli;
     }
 
-    public Object ToModel() {
-        ObatModel o = new ObatModel();
-        o.setObatBeli(obatBeli);
-        o.setObatId(obatId);
-        o.setObatJual(obatJual);
-        o.setObatNama(obatNama);
-        o.setObatStok(obatStok);
-        return o;
-    }
-
     @Override
     public String toString() {
         return
-                "ObatData{" +
+                "ObatModel{" +
                         "obat_jual = '" + obatJual + '\'' +
                         ",obat_stok = '" + obatStok + '\'' +
                         ",obat_nama = '" + obatNama + '\'' +

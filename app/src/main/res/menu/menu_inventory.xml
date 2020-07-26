@@ -5,4 +5,8 @@
         app:showAsAction="ifRoom"
         android:title="Penjualan"
         android:icon="@drawable/ic_outline_add_shopping"/>
+    <item android:id="@+id/menu_keluar"
+        app:showAsAction="withText"
+        android:title="Keluar"
+        android:icon="@drawable/ic_outline_add_shopping"/>
 </menu>

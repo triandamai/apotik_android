@@ -7,11 +7,11 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.tdn.apotik_kasir.ui.inventory.InventoryFragment"
+        android:name="com.tdn.apotik_kasir.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/navigation_inventory"
+        android:id="@+id/navigation_item"
         android:name="com.tdn.apotik_kasir.ui.inventory.InventoryFragment"
         android:label="Inventory"
         tools:layout="@layout/fragment_inventory" />

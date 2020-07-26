@@ -1,5 +1,6 @@
 package com.tdn.apotik_kasir.ui.transaction;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -8,11 +9,21 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.MyViewHolder> {
-    private List<String> TabunganModels;
+    private List<String> TabunganModels = new ArrayList<>();
+
+    private Context context;
+    private AdapterClicked adapterClicked;
+
+    public AdapterTransaction(Context context, AdapterClicked adapterClicked) {
+        this.context = context;
+        this.adapterClicked = adapterClicked;
+    }
 
     @NonNull
     @Override

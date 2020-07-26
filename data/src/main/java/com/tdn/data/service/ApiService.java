@@ -1,9 +1,12 @@
 package com.tdn.data.service;
 
 
+import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.model.UserModel;
 import com.tdn.domain.serialize.req.ReqAuth;
+import com.tdn.domain.serialize.res.ResponseAction;
 import com.tdn.domain.serialize.res.ResponseAuth;
+import com.tdn.domain.serialize.res.ResponseGetObat;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -44,6 +47,17 @@ public interface ApiService {
     @DELETE("user/users")
     Call<Response> deleteUser(@Body UserModel userModel);
 
+    @Headers({accept_json, content_type, api_key})
+    @GET("obat/obats")
+    Call<ResponseGetObat> getObat();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("obat/obats")
+    Call<ResponseGetObat> getObatById(@Query("id") String id);
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("penjualan/penjualan_temp")
+    Call<ResponseAction> postTempPenjualan(@Body PenjualanTempModel penjualanTempModel);
 
     class Factory {
         public static ApiService create() {

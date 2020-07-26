@@ -1,73 +1,86 @@
 package com.tdn.domain.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.tdn.domain.object.ObatObject;
 
-public class ObatModel {
+public class ObatModel extends BaseModel {
 
-	@SerializedName("obat_jual")
-	private String obatJual;
+    @SerializedName("obat_jual")
+    private String obatJual;
 
-	@SerializedName("obat_stok")
-	private String obatStok;
+    @SerializedName("obat_stok")
+    private String obatStok;
 
-	@SerializedName("obat_nama")
-	private String obatNama;
+    @SerializedName("obat_nama")
+    private String obatNama;
 
-	@SerializedName("obat_id")
-	private String obatId;
+    @SerializedName("obat_id")
+    private String obatId;
 
-	@SerializedName("obat_beli")
-	private String obatBeli;
+    @SerializedName("obat_beli")
+    private String obatBeli;
 
-	public void setObatJual(String obatJual){
-		this.obatJual = obatJual;
-	}
+    public void setObatJual(String obatJual) {
+        this.obatJual = obatJual;
+    }
 
-	public String getObatJual(){
-		return obatJual;
-	}
+    public String getObatJual() {
+        return obatJual;
+    }
 
-	public void setObatStok(String obatStok){
-		this.obatStok = obatStok;
-	}
+    public void setObatStok(String obatStok) {
+        this.obatStok = obatStok;
+    }
 
-	public String getObatStok(){
-		return obatStok;
-	}
+    public String getObatStok() {
+        return obatStok;
+    }
 
-	public void setObatNama(String obatNama){
-		this.obatNama = obatNama;
-	}
+    public void setObatNama(String obatNama) {
+        this.obatNama = obatNama;
+    }
 
-	public String getObatNama(){
-		return obatNama;
-	}
+    public String getObatNama() {
+        return obatNama;
+    }
 
-	public void setObatId(String obatId){
-		this.obatId = obatId;
-	}
+    public void setObatId(String obatId) {
+        this.obatId = obatId;
+    }
 
-	public String getObatId(){
-		return obatId;
-	}
+    public String getObatId() {
+        return obatId;
+    }
 
-	public void setObatBeli(String obatBeli){
-		this.obatBeli = obatBeli;
-	}
+    public void setObatBeli(String obatBeli) {
+        this.obatBeli = obatBeli;
+    }
 
-	public String getObatBeli(){
-		return obatBeli;
-	}
+    public String getObatBeli() {
+        return obatBeli;
+    }
 
-	@Override
- 	public String toString(){
-		return 
-			"ObatModel{" +
-			"obat_jual = '" + obatJual + '\'' + 
-			",obat_stok = '" + obatStok + '\'' + 
-			",obat_nama = '" + obatNama + '\'' + 
-			",obat_id = '" + obatId + '\'' + 
-			",obat_beli = '" + obatBeli + '\'' + 
-			"}";
-		}
+    @Override
+    public Object ToObject() {
+        ObatObject o = new ObatObject();
+        o.setObatBeli(obatBeli);
+        o.setObatId(obatId);
+        o.setObatJual(obatJual);
+        o.setObatNama(obatNama);
+        o.setObatStok(obatStok);
+        return o;
+    }
+
+    @Override
+
+    public String toString() {
+        return
+                "ObatModel{" +
+                        "obat_jual = '" + obatJual + '\'' +
+                        ",obat_stok = '" + obatStok + '\'' +
+                        ",obat_nama = '" + obatNama + '\'' +
+                        ",obat_id = '" + obatId + '\'' +
+                        ",obat_beli = '" + obatBeli + '\'' +
+                        "}";
+    }
 }

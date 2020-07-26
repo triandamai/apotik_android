@@ -1,11 +1,18 @@
 package com.tdn.data.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.tdn.data.service.ApiService;
+import com.tdn.domain.model.ObatModel;
+import com.tdn.domain.object.ObatObject;
+import com.tdn.domain.serialize.res.ResponseGetObat;
 
 
 import io.realm.Realm;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.tdn.data.service.ApiHandler.cek;
 
@@ -36,34 +43,33 @@ public class Repository {
         return service;
     }
 
-    public void getAllUser() {
-//        service.getAllUser().enqueue(new Callback<ResponseGetUser>() {
-//            @Override
-//            public void onResponse(Call<ResponseGetUser> call, Response<ResponseGetUser> response) {
-//                Log.e(TAG, response.toString());
-//
-//                if (cek(response.code())) {
-//                    Log.e(TAG, response.body().toString());
-//                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
-//                        realm.beginTransaction();
-//                        realm.delete(UserObject.class);
-//                        realm.commitTransaction();
-//                        for (UserModel data : response.body().getData()) {
-//                            UserObject o = (UserObject) data.ToObject();
-//                            realm.executeTransaction(realm -> {
-//                                realm.copyToRealmOrUpdate(o);
-//                            });
-//                        }
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseGetUser> call, Throwable t) {
-//                Log.e(TAG, t.toString());
-//            }
-//        });
+    public void getObats() {
+        service.getObat().enqueue(new Callback<ResponseGetObat>() {
+            @Override
+            public void onResponse(Call<ResponseGetObat> call, Response<ResponseGetObat> response) {
+                if (cek(response.code())) {
+                    //Log.e(TAG, response.body().toString());
+                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+                        realm.beginTransaction();
+                        realm.delete(ObatObject.class);
+                        realm.commitTransaction();
+                        for (ObatModel data : response.body().getData()) {
+                            ObatObject o = (ObatObject) data.ToObject();
+                            realm.executeTransaction(realm -> {
+                                realm.copyToRealmOrUpdate(o);
+                            });
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetObat> call, Throwable t) {
+
+            }
+        });
+
     }
 
 
