@@ -1,5 +1,7 @@
 package com.tdn.apotik_kasir.ui.notification;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -13,10 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tdn.apotik_kasir.R;
+import com.tdn.apotik_kasir.core.VMFactory;
+import com.tdn.apotik_kasir.core.callback.ActionListener;
+import com.tdn.apotik_kasir.core.callback.AdapterClicked;
+import com.tdn.apotik_kasir.databinding.FragmentNotificationBinding;
 
 public class NotificationFragment extends Fragment {
 
     private NotificationViewModel mViewModel;
+    private FragmentNotificationBinding binding;
 
     public static NotificationFragment newInstance() {
         return new NotificationFragment();
@@ -25,14 +32,31 @@ public class NotificationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_notification, container, false);
+        mViewModel = new ViewModelProvider(this, new VMFactory(getContext(), actionListener)).get(NotificationViewModel.class);
+
+        return binding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(NotificationViewModel.class);
-        // TODO: Use the ViewModel
-    }
+    private ActionListener actionListener = new ActionListener() {
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onSuccess(@NonNull String message) {
+
+        }
+
+        @Override
+        public void onError(@NonNull String message) {
+
+        }
+    };
+    private AdapterClicked adapterClicked = posisi -> {
+
+    };
+
 
 }

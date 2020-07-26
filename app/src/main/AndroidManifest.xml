@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tdn.apotik_kasir">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -23,6 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".core.MyApp"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.MainPage"
@@ -36,8 +38,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".core.ImagePickerActivity"
-             />
+        <activity android:name=".core.ImagePickerActivity" />
 
         <!-- uCrop cropping activity -->
         <activity

@@ -63,15 +63,34 @@ public class ApiHandler {
         }
 
     }
-    public static boolean cek(int code,String res) {
+
+    public static boolean cek(int code, String res) {
         try {
-            if(cek(code)){
-                if(cek(res)){
+            if (cek(code)) {
+                if (cek(res)) {
                     return true;
-                }else {
+                } else {
                     return false;
                 }
-            }else {
+            } else {
+                return false;
+            }
+        } catch (NullPointerException e) {
+            Log.e(TAG, Objects.requireNonNull(e.getMessage()));
+            return false;
+        }
+
+    }
+
+    public static boolean cek(int code, int res) {
+        try {
+            if (cek(code)) {
+                if (cek(res)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
                 return false;
             }
         } catch (NullPointerException e) {

@@ -27,11 +27,23 @@ public class VMFactory implements ViewModelProvider.Factory {
         this.context = context;
     }
 
+    public VMFactory(@NonNull AuthListener context) {
+        this.authListener = context;
+    }
+
+    public VMFactory(@NonNull ActionListener context) {
+        this.actionListener = context;
+    }
+
     public VMFactory(@NonNull Context context, ActionListener actionListener) {
         this.context = context;
         this.actionListener = actionListener;
     }
 
+    public VMFactory(@NonNull Context context, AuthListener actionListener) {
+        this.context = context;
+        this.authListener = actionListener;
+    }
 
     public VMFactory(@NonNull Context context, ActionListener actionListener, String id) {
         this.context = context;

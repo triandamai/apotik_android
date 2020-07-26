@@ -9,5 +9,5 @@ import com.tdn.apotik_kasir.core.callback.ActionListener;
 public class InventoryViewModel extends ViewModel {
     public InventoryViewModel(Context context, ActionListener actionListener) {
     }
-    // TODO: Implement the ViewModel
+
 }

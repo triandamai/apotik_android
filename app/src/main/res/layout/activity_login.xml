@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center||center_horizontal"
+            android:layout_gravity="center"
             android:paddingStart="@dimen/dp_16"
             android:paddingEnd="@dimen/dp_16"
             android:orientation="vertical">
@@ -50,7 +50,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="64dp"
                 android:backgroundTint="@color/colorPrimary"
-                android:enabled="false"
+                android:enabled="true"
                 android:text="@string/action_sign_in"
                 android:textColor="@color/putih" />
 

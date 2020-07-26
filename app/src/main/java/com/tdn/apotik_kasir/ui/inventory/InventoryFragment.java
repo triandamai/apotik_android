@@ -1,5 +1,6 @@
 package com.tdn.apotik_kasir.ui.inventory;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -14,10 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tdn.apotik_kasir.R;
+import com.tdn.apotik_kasir.core.VMFactory;
+import com.tdn.apotik_kasir.core.callback.ActionListener;
+import com.tdn.apotik_kasir.databinding.FragmentInventoryBinding;
 
 public class InventoryFragment extends Fragment {
 
     private InventoryViewModel mViewModel;
+    private FragmentInventoryBinding binding;
 
     public static InventoryFragment newInstance() {
         return new InventoryFragment();
@@ -26,14 +31,26 @@ public class InventoryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_inventory, container, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_inventory, container, false);
+        mViewModel = new ViewModelProvider(this, new VMFactory(getContext(), actionListener)).get(InventoryViewModel.class);
+        return binding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(InventoryViewModel.class);
-        // TODO: Use the ViewModel
-    }
+    private ActionListener actionListener = new ActionListener() {
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onSuccess(@NonNull String message) {
+
+        }
+
+        @Override
+        public void onError(@NonNull String message) {
+
+        }
+    };
 
 }

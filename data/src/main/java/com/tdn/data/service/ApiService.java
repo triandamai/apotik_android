@@ -1,6 +1,10 @@
 package com.tdn.data.service;
 
 
+import com.tdn.domain.model.UserModel;
+import com.tdn.domain.serialize.req.ReqAuth;
+import com.tdn.domain.serialize.res.ResponseAuth;
+
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -13,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String BASE = "https://apipengaduan.000webhostapp.com/";
+    String BASE = "http://192.168.100.5/apotekk/";
     String BASE_URL = BASE + "api/v1/";
     String BASE_URL_IMAGE = BASE + "assets/pengaduan/";
     String USER_KEY = "";
@@ -29,8 +33,8 @@ public interface ApiService {
     Call<Response> getUserById(@Query("id") String id);
 
     @Headers({accept_json, content_type, api_key})
-    @POST("user/users")
-    Call<Response> postUser(@Body Response userModel);
+    @POST("user/auth")
+    Call<ResponseAuth> auth(@Body ReqAuth reqAuth);
 
     @Headers({accept_json, content_type, api_key})
     @PUT("user/users")
@@ -39,7 +43,6 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @DELETE("user/users")
     Call<Response> deleteUser(@Body UserModel userModel);
-
 
 
     class Factory {
