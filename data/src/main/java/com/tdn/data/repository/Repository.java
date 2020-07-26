@@ -5,8 +5,11 @@ import android.util.Log;
 
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.model.ObatModel;
+import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.ObatObject;
+import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.res.ResponseGetObat;
+import com.tdn.domain.serialize.res.ResponseGetPenjualanTemp;
 
 
 import io.realm.Realm;
@@ -69,6 +72,36 @@ public class Repository {
 
             }
         });
+
+    }
+
+    public void getPenjualanTemp() {
+        service.getPenjualanTemp().enqueue(new Callback<ResponseGetPenjualanTemp>() {
+            @Override
+            public void onResponse(Call<ResponseGetPenjualanTemp> call, Response<ResponseGetPenjualanTemp> response) {
+                if (cek(response.code())) {
+                    //Log.e(TAG, response.body().toString());
+                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+                        realm.beginTransaction();
+                        realm.delete(PenjualanTempObject.class);
+                        realm.commitTransaction();
+                        for (PenjualanTempModel data : response.body().getData()) {
+                            PenjualanTempObject o = (PenjualanTempObject) data.ToObject();
+                            realm.executeTransaction(realm -> {
+                                realm.copyToRealmOrUpdate(o);
+                            });
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetPenjualanTemp> call, Throwable t) {
+
+            }
+        });
+
 
     }
 

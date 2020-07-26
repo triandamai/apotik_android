@@ -16,6 +16,7 @@ import com.tdn.apotik_kasir.ui.notification.NotificationViewModel;
 import com.tdn.apotik_kasir.ui.settings.SettingViewModel;
 import com.tdn.apotik_kasir.ui.suplier.SuplierViewModel;
 import com.tdn.apotik_kasir.ui.transaction.NewTransactionViewModel;
+import com.tdn.apotik_kasir.ui.transaction.TransactionViewModel;
 
 public class VMFactory implements ViewModelProvider.Factory {
     private Context context;
@@ -72,6 +73,8 @@ public class VMFactory implements ViewModelProvider.Factory {
             return (T) new SuplierViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(NewTransactionViewModel.class)) {
             return (T) new NewTransactionViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(TransactionViewModel.class)) {
+            return (T) new TransactionViewModel(context, actionListener);
         } else {
             throw new IllegalArgumentException("Unknown ViewModel class");
         }

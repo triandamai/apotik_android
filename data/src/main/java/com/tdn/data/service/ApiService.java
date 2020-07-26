@@ -7,6 +7,7 @@ import com.tdn.domain.serialize.req.ReqAuth;
 import com.tdn.domain.serialize.res.ResponseAction;
 import com.tdn.domain.serialize.res.ResponseAuth;
 import com.tdn.domain.serialize.res.ResponseGetObat;
+import com.tdn.domain.serialize.res.ResponseGetPenjualanTemp;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -58,6 +59,10 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @POST("penjualan/penjualan_temp")
     Call<ResponseAction> postTempPenjualan(@Body PenjualanTempModel penjualanTempModel);
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("penjualan/penjualan_temp")
+    Call<ResponseGetPenjualanTemp> getPenjualanTemp();
 
     class Factory {
         public static ApiService create() {
