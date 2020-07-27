@@ -81,10 +81,11 @@ public class Repository {
             public void onResponse(Call<ResponseGetPenjualanTemp> call, Response<ResponseGetPenjualanTemp> response) {
                 if (cek(response.code())) {
                     //Log.e(TAG, response.body().toString());
+                    realm.beginTransaction();
+                    realm.delete(PenjualanTempObject.class);
+                    realm.commitTransaction();
                     if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
-                        realm.beginTransaction();
-                        realm.delete(PenjualanTempObject.class);
-                        realm.commitTransaction();
+
                         for (PenjualanTempModel data : response.body().getData()) {
                             PenjualanTempObject o = (PenjualanTempObject) data.ToObject();
                             realm.executeTransaction(realm -> {

@@ -4,6 +4,7 @@ package com.tdn.data.service;
 import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.model.UserModel;
 import com.tdn.domain.serialize.req.ReqAuth;
+import com.tdn.domain.serialize.req.ReqPenjualan;
 import com.tdn.domain.serialize.res.ResponseAction;
 import com.tdn.domain.serialize.res.ResponseAuth;
 import com.tdn.domain.serialize.res.ResponseGetObat;
@@ -63,6 +64,10 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @GET("penjualan/penjualan_temp")
     Call<ResponseGetPenjualanTemp> getPenjualanTemp();
+
+    @Headers({accept_json, content_type, api_key})
+    @POST("penjualan/penjualan")
+    Call<ResponseAction> postPenjualan(@Body ReqPenjualan reqPenjualan);
 
     class Factory {
         public static ApiService create() {

@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class InventoryFragment extends Fragment {
     private ActionListener actionListener = new ActionListener() {
         @Override
         public void onStart() {
+            Log.e("hai", "start");
             Snackbar.make(binding.getRoot(), "Menambahkan..", BaseTransientBottomBar.LENGTH_LONG).show();
         }
 
@@ -94,7 +96,7 @@ public class InventoryFragment extends Fragment {
         builder.setTitle("Tambahkan Ke keranjang ");
         builder.setMessage(o.getObatNama());
 
-        final EditText input = new EditText(getContext());
+        EditText input = new EditText(getContext());
 
         input.setInputType(InputType.TYPE_CLASS_NUMBER |
                 InputType.TYPE_NUMBER_FLAG_DECIMAL);
