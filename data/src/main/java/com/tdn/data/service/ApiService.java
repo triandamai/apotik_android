@@ -8,7 +8,9 @@ import com.tdn.domain.serialize.req.ReqPenjualan;
 import com.tdn.domain.serialize.res.ResponseAction;
 import com.tdn.domain.serialize.res.ResponseAuth;
 import com.tdn.domain.serialize.res.ResponseGetObat;
+import com.tdn.domain.serialize.res.ResponseGetPenjualan;
 import com.tdn.domain.serialize.res.ResponseGetPenjualanTemp;
+import com.tdn.domain.serialize.res.ResponsePenjualanDetail;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -64,6 +66,14 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @GET("penjualan/penjualan_temp")
     Call<ResponseGetPenjualanTemp> getPenjualanTemp();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("penjualan/penjualan")
+    Call<ResponseGetPenjualan> getPenjualan();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("penjualan/penjualan_detail")
+    Call<ResponsePenjualanDetail> getPenjualanDetail();
 
     @Headers({accept_json, content_type, api_key})
     @POST("penjualan/penjualan")

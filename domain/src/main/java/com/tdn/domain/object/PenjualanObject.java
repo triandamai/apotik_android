@@ -1,8 +1,8 @@
-package com.tdn.domain.model;
+package com.tdn.domain.object;
 
-import com.tdn.domain.object.PenjualanObject;
+import io.realm.RealmObject;
 
-public class PenjualanModel extends BaseModel {
+public class PenjualanObject extends RealmObject {
     private String penjualanTanggal;
     private String penjualanIdTransaksi;
     private String penjualanSubtotal;
@@ -49,15 +49,5 @@ public class PenjualanModel extends BaseModel {
                         ",penjualan_subtotal = '" + penjualanSubtotal + '\'' +
                         ",penjualan_id = '" + penjualanId + '\'' +
                         "}";
-    }
-
-    @Override
-    public Object ToObject() {
-        PenjualanObject o = new PenjualanObject();
-        o.setPenjualanId(penjualanId);
-        o.setPenjualanIdTransaksi(penjualanIdTransaksi);
-        o.setPenjualanSubtotal(penjualanSubtotal);
-        o.setPenjualanTanggal(penjualanTanggal);
-        return o;
     }
 }

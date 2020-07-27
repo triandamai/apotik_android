@@ -5,11 +5,17 @@ import android.util.Log;
 
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.model.ObatModel;
+import com.tdn.domain.model.PenjualanDetailModel;
+import com.tdn.domain.model.PenjualanModel;
 import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.ObatObject;
+import com.tdn.domain.object.PenjualanDetailObject;
+import com.tdn.domain.object.PenjualanObject;
 import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.res.ResponseGetObat;
+import com.tdn.domain.serialize.res.ResponseGetPenjualan;
 import com.tdn.domain.serialize.res.ResponseGetPenjualanTemp;
+import com.tdn.domain.serialize.res.ResponsePenjualanDetail;
 
 
 import io.realm.Realm;
@@ -104,6 +110,66 @@ public class Repository {
         });
 
 
+    }
+
+    public void getPenjualan() {
+        service.getPenjualan().enqueue(new Callback<ResponseGetPenjualan>() {
+            @Override
+            public void onResponse(Call<ResponseGetPenjualan> call, Response<ResponseGetPenjualan> response) {
+                if (cek(response.code())) {
+                    //Log.e(TAG, response.body().toString());
+                    realm.beginTransaction();
+                    realm.delete(PenjualanTempObject.class);
+                    realm.commitTransaction();
+                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+
+                        for (PenjualanModel data : response.body().getData()) {
+                            PenjualanObject o = (PenjualanObject) data.ToObject();
+                            realm.executeTransaction(realm -> {
+                                realm.copyToRealmOrUpdate(o);
+                            });
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetPenjualan> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    public void getPenjualanDetail() {
+        service.getPenjualanDetail().enqueue(new Callback<ResponsePenjualanDetail>() {
+            @Override
+            public void onResponse(Call<ResponsePenjualanDetail> call, Response<ResponsePenjualanDetail> response) {
+                if (cek(response.code())) {
+                    //Log.e(TAG, response.body().toString());
+                    realm.beginTransaction();
+                    realm.delete(PenjualanTempObject.class);
+                    realm.commitTransaction();
+                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+
+                        for (PenjualanDetailModel data : response.body().getData()) {
+                            PenjualanDetailObject o = (PenjualanDetailObject) data.ToObject();
+                            realm.executeTransaction(realm -> {
+                                realm.copyToRealmOrUpdate(o);
+                            });
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponsePenjualanDetail> call, Throwable t) {
+
+            }
+        });
     }
 
 

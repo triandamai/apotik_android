@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,6 +15,7 @@ import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.AuthListener;
 import com.tdn.apotik_kasir.databinding.ActivityLoginBinding;
+import com.tdn.apotik_kasir.ui.MainPage;
 import com.tdn.data.persistensi.MyUser;
 import com.tdn.domain.model.UserModel;
 
@@ -45,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         public void onSuccess(@NonNull String message, UserModel data) {
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
             MyUser.getInstance(LoginActivity.this).setUser(data);
+            startActivity(new Intent(LoginActivity.this, MainPage.class));
+            finish();
             binding.login.setVisibility(View.VISIBLE);
             binding.loading.setVisibility(View.GONE);
         }
