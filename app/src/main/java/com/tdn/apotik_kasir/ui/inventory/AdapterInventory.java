@@ -41,8 +41,8 @@ public class AdapterInventory extends RecyclerView.Adapter<AdapterInventory.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ObatObject o = obatObjectList.get(position);
         holder.binding.tvNamaItem.setText(o.getObatNama());
-        holder.binding.tvSatuanJual.setText("Harga : " + o.getObatJual());
-        holder.binding.tvStok.setText("Stok : " + o.getObatStok());
+        holder.binding.tvSatuanJual.setText("Harga : " + o.getDetailHargaJual());
+        holder.binding.tvStok.setText("Stok : " + o.getDetailJumlah());
         holder.binding.lyItem.setOnClickListener(view -> {
 
             adapterClicked.onClick(position);

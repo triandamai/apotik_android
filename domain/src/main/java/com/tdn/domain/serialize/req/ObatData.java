@@ -61,15 +61,6 @@ public class ObatData {
         return obatBeli;
     }
 
-    public Object ToModel() {
-        ObatModel o = new ObatModel();
-        o.setObatBeli(obatBeli);
-        o.setObatId(obatId);
-        o.setObatJual(obatJual);
-        o.setObatNama(obatNama);
-        o.setObatStok(obatStok);
-        return o;
-    }
 
     @Override
     public String toString() {

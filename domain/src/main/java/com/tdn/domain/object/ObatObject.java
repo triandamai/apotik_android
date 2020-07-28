@@ -7,7 +7,7 @@ import io.realm.annotations.PrimaryKey;
 
 public class ObatObject extends RealmObject {
 
-
+    @PrimaryKey
     private String detailId;
 
     private String detailIdTransaksi;

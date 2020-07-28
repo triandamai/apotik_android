@@ -107,7 +107,7 @@ public class InventoryFragment extends Fragment {
             PenjualanTempModel temp = new PenjualanTempModel();
 
             input.setText("1");
-            double harga = Double.parseDouble(o.getObatJual());
+            double harga = Double.parseDouble(o.getDetailHargaJual());
             double jumlah = Double.parseDouble(input.getText().toString());
             double total = harga * jumlah;
             temp.setTempJumlah(input.getText().toString());
