@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.ItemObatBinding;
+import com.tdn.apotik_kasir.databinding.ItemPenjualanBinding;
 import com.tdn.domain.object.ObatObject;
 import com.tdn.domain.object.PenjualanObject;
 
@@ -32,18 +33,17 @@ public class AdapterPenjualan extends RecyclerView.Adapter<AdapterPenjualan.MyVi
     @NonNull
     @Override
     public AdapterPenjualan.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemObatBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_obat, parent, false);
+        ItemPenjualanBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_penjualan, parent, false);
         return new MyViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualan.MyViewHolder holder, int position) {
         PenjualanObject o = obatObjectList.get(position);
-        holder.binding.tvNamaItem.setText(o.getPenjualanIdTransaksi());
-        holder.binding.tvSatuanJual.setText(o.getPenjualanTanggal());
-        holder.binding.tvStok.setText("Rp" + o.getPenjualanSubtotal());
+        holder.binding.tvId.setText(o.getPenjualanIdTransaksi());
+        holder.binding.tvTanggal.setText(o.getPenjualanTanggal());
+        holder.binding.tvTotal.setText("Rp" + o.getPenjualanSubtotal());
         holder.binding.lyItem.setOnClickListener(view -> {
-
             adapterClicked.onClick(position);
         });
     }
@@ -93,9 +93,9 @@ public class AdapterPenjualan extends RecyclerView.Adapter<AdapterPenjualan.MyVi
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private ItemObatBinding binding;
+        private ItemPenjualanBinding binding;
 
-        public MyViewHolder(@NonNull ItemObatBinding itemView) {
+        public MyViewHolder(@NonNull ItemPenjualanBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
         }

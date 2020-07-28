@@ -53,7 +53,11 @@ public class DetailPenjualanFragment extends Fragment {
 
     private void observe(DetailPenjualanViewModel mViewModel) {
         mViewModel.getPenjualan().observe(getViewLifecycleOwner(), penjualanDetailObjects -> {
+            if (penjualanDetailObjects != null) {
+                adapterDetailPenjualan.setData(penjualanDetailObjects);
+            } else {
 
+            }
         });
     }
 }

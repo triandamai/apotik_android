@@ -51,7 +51,7 @@ public class MyUser {
     public UserModel getUser() {
         try {
             Gson gson = new Gson();
-            String json = sharedPreferences.getString(KEY_PENJUALAN, "");
+            String json = sharedPreferences.getString(KEY_USER, "");
             UserModel user = gson.fromJson(json, UserModel.class);
             return user;
         } catch (NullPointerException e) {
@@ -64,7 +64,7 @@ public class MyUser {
         try {
 
             Gson gson = new Gson();
-            editor.putString(KEY_USER, gson.toJson(user));
+            editor.putString(KEY_PENJUALAN, gson.toJson(user));
             editor.apply();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage().toString());

@@ -41,7 +41,7 @@ public class PenjualanFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.penjualan_fragment, container, false);
         mViewModel = new ViewModelProvider(this, new VMFactory(getContext())).get(PenjualanViewModel.class);
-        binding.getRoot();
+
         adapterPenjualan = new AdapterPenjualan(getContext(), posisi -> {
             PenjualanModel penjualanModel = (PenjualanModel) adapterPenjualan.getFromPosition(posisi).ToModel();
             MyUser.getInstance(getContext()).setLastPenjualan(penjualanModel);
