@@ -184,13 +184,23 @@ public class Repository {
                         realm.delete(PenjualanDetailObject.class);
                         realm.commitTransaction();
                         if (response.body().getData() != null) {
+                            if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
 
-                            for (PenjualanDetailModel data : response.body().getData()) {
-                                PenjualanDetailObject o = (PenjualanDetailObject) data.ToObject();
-                                realm.executeTransaction(realm -> {
-                                    realm.copyToRealmOrUpdate(o);
-                                });
+                                for (PenjualanDetailModel data : response.body().getData()) {
+                                    PenjualanDetailObject o = (PenjualanDetailObject) data.ToObject();
+                                    realm.executeTransaction(realm -> {
+                                        realm.copyToRealmOrUpdate(o);
+                                    });
+                                }
+                            } else {
+                                realm.beginTransaction();
+                                realm.delete(PenjualanDetailObject.class);
+                                realm.commitTransaction();
                             }
+                        } else {
+                            realm.beginTransaction();
+                            realm.delete(PenjualanDetailObject.class);
+                            realm.commitTransaction();
                         }
                     } else {
                         realm.beginTransaction();
@@ -198,6 +208,7 @@ public class Repository {
                         realm.commitTransaction();
                     }
                 }
+
             }
 
             @Override
