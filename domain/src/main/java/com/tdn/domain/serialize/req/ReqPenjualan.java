@@ -4,50 +4,22 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ReqPenjualan {
-    @SerializedName("temp_id")
+    @SerializedName("subtotal")
     @Expose
-    private String tempId;
-    @SerializedName("temp_jumlah")
-    @Expose
-    private String tempJumlah;
-    @SerializedName("temp_id_stok")
-    @Expose
-    private String tempIdStok;
-    @SerializedName("temp_total")
-    @Expose
-    private String tempTotal;
+    private String subtotal;
 
-    public String getTempId() {
-        return tempId;
+    public String getSubtotal() {
+        return subtotal;
     }
 
-    public void setTempId(String tempId) {
-        this.tempId = tempId;
+    public void setSubtotal(String subtotal) {
+        this.subtotal = subtotal;
     }
 
-    public String getTempJumlah() {
-        return tempJumlah;
+    @Override
+    public String toString() {
+        return "ReqPenjualan{" +
+                "subtotal='" + subtotal + '\'' +
+                '}';
     }
-
-    public void setTempJumlah(String tempJumlah) {
-        this.tempJumlah = tempJumlah;
-    }
-
-    public String getTempIdStok() {
-        return tempIdStok;
-    }
-
-    public void setTempIdStok(String tempIdStok) {
-        this.tempIdStok = tempIdStok;
-    }
-
-    public String getTempTotal() {
-        return tempTotal;
-    }
-
-    public void setTempTotal(String tempTotal) {
-        this.tempTotal = tempTotal;
-    }
-
-
 }

@@ -44,7 +44,6 @@ public class AdapterInventory extends RecyclerView.Adapter<AdapterInventory.MyVi
         holder.binding.tvSatuanJual.setText("Harga : " + o.getDetailHargaJual());
         holder.binding.tvStok.setText("Stok : " + o.getDetailJumlah());
         holder.binding.lyItem.setOnClickListener(view -> {
-
             adapterClicked.onClick(position);
         });
     }

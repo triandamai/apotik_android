@@ -43,7 +43,7 @@ public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         PenjualanTempObject m = penjualanTempModels.get(position);
-        holder.binding.tvNamaItem.setText(m.getTempNama());
+        holder.binding.tvNamaItem.setText(m.get);
         holder.binding.tvSatuanJual.setText(m.getTempJumlah());
         holder.binding.tvStok.setText(m.getTempTotalharga());
 

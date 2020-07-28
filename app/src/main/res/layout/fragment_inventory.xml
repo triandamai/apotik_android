@@ -5,10 +5,12 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/parent"
         tools:context=".ui.inventory.InventoryFragment">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -26,12 +28,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginBottom="?actionBarSize"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:shimmer_recycler_item_count="5"
                     app:shimmer_recycler_layout="@layout/item_shimmer" />
             </LinearLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 </layout>

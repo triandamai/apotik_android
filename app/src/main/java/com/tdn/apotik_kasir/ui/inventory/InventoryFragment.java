@@ -1,38 +1,30 @@
 package com.tdn.apotik_kasir.ui.inventory;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.ActionListener;
-import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.FragmentInventoryBinding;
-import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.ObatObject;
-
-import java.util.List;
 
 public class InventoryFragment extends Fragment {
 
@@ -48,8 +40,28 @@ public class InventoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_inventory, container, false);
-        mViewModel = new ViewModelProvider(this, new VMFactory(getContext(), actionListener)).get(InventoryViewModel.class);
-        adapterInventory = new AdapterInventory(getContext(), adapterClicked);
+        mViewModel = new ViewModelProvider(this, new VMFactory(getContext(), actionListener))
+                .get(InventoryViewModel.class);
+        adapterInventory = new AdapterInventory(getContext(), posisi -> {
+
+            ObatObject o = adapterInventory.getFromPosition(posisi);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Tambahkan Ke keranjang ");
+            builder.setMessage(o.getObatNama());
+
+            EditText input = new EditText(getContext());
+            input.setText("1");
+            input.setInputType(InputType.TYPE_CLASS_NUMBER |
+                    InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            builder.setView(input);
+            builder.setPositiveButton("Tambahkan", (dialog, which) -> {
+                mViewModel.tambahCart(o, input.getText().toString());
+
+            });
+
+            builder.show();
+        });
         binding.rv.setAdapter(adapterInventory);
         binding.swipe.setOnRefreshListener(() -> {
             mViewModel.getFromApi();
@@ -64,6 +76,10 @@ public class InventoryFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        observe(mViewModel);
+    }
+
+    private void observe(InventoryViewModel mViewModel) {
         mViewModel.getListObats().observe(getViewLifecycleOwner(), obatObjects -> {
             if (obatObjects != null) {
                 adapterInventory.setData(obatObjects);
@@ -76,50 +92,23 @@ public class InventoryFragment extends Fragment {
     private ActionListener actionListener = new ActionListener() {
         @Override
         public void onStart() {
-            Log.e("hai", "start");
-            Snackbar.make(binding.getRoot(), "Menambahkan..", BaseTransientBottomBar.LENGTH_LONG).show();
+
+            Snackbar.make(binding.parent, "Menambahkan..", BaseTransientBottomBar.LENGTH_LONG).show();
+
         }
 
         @Override
         public void onSuccess(@NonNull String message) {
-            Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
+            Snackbar.make(binding.parent, message, BaseTransientBottomBar.LENGTH_LONG).show();
+
         }
 
         @Override
         public void onError(@NonNull String message) {
-            Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
+            Snackbar.make(binding.parent, message, BaseTransientBottomBar.LENGTH_LONG).show();
+
         }
     };
-    private AdapterClicked adapterClicked = posisi -> {
-        ObatObject o = adapterInventory.getFromPosition(posisi);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Tambahkan Ke keranjang ");
-        builder.setMessage(o.getObatNama());
 
-        EditText input = new EditText(getContext());
-
-        input.setInputType(InputType.TYPE_CLASS_NUMBER |
-                InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        builder.setView(input);
-        builder.setCancelable(true);
-
-        builder.setPositiveButton("Tambahkan", (dialogInterface, i) -> {
-            PenjualanTempModel temp = new PenjualanTempModel();
-
-            input.setText("1");
-            double harga = Double.parseDouble(o.getDetailHargaJual());
-            double jumlah = Double.parseDouble(input.getText().toString());
-            double total = harga * jumlah;
-            temp.setTempJumlah(input.getText().toString());
-            temp.setTempId("");
-
-            temp.setTempNama(o.getObatNama());
-            temp.setTempObatId(o.getObatId());
-            temp.setTempTotalharga(String.valueOf(total));
-            mViewModel.tambahCart(temp);
-        });
-
-        builder.show();
-    };
 
 }

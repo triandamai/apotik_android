@@ -1,10 +1,7 @@
 package com.tdn.apotik_kasir.ui.transaction;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -12,13 +9,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,17 +21,16 @@ import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.FragmentTransactionBinding;
-import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.req.ReqPenjualan;
-
-import java.util.List;
+import com.tdn.domain.serialize.req.ReqPenjualanTemp;
 
 public class TransactionFragment extends Fragment {
 
     private TransactionViewModel mViewModel;
     private FragmentTransactionBinding binding;
     private AdapterTransaction adapterTransaction;
+    private String total = "0";
 
     public static TransactionFragment newInstance() {
         return new TransactionFragment();
@@ -59,19 +52,11 @@ public class TransactionFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("Selesaikan Transaksi ? ");
 
+            builder.setPositiveButton("Selesai", (dialogInterface, i) -> {
 
-            EditText input = new EditText(getContext());
-
-            input.setInputType(InputType.TYPE_CLASS_NUMBER |
-                    InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            builder.setView(input);
-            builder.setCancelable(true);
-
-            builder.setPositiveButton("Tambahkan", (dialogInterface, i) -> {
-                input.setText("0");
-                ReqPenjualan reqPenjualan = new ReqPenjualan();
-                reqPenjualan.setSubtotal(input.getText().toString());
-                mViewModel.savepenjualan(reqPenjualan);
+                ReqPenjualan reqPenjualanTemp = new ReqPenjualan();
+                reqPenjualanTemp.setSubtotal(total);
+                mViewModel.savepenjualan(reqPenjualanTemp);
             });
 
             builder.show();
@@ -92,6 +77,13 @@ public class TransactionFragment extends Fragment {
         mViewModel.getPenjualan().observe(getViewLifecycleOwner(), penjualanTempObjects -> {
             if (penjualanTempObjects != null) {
                 adapterTransaction.setData(penjualanTempObjects);
+                double total = 0;
+                for (PenjualanTempObject o : penjualanTempObjects) {
+                    double jml = Double.parseDouble(o.getTempTotalharga());
+                    total = total + jml;
+                }
+                binding.tvTotal.setText("Total Rp " + total);
+                total = total;
             } else {
 
             }
@@ -111,6 +103,8 @@ public class TransactionFragment extends Fragment {
         @Override
         public void onSuccess(@NonNull String message) {
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
+            mViewModel.getFromApi();
+            mViewModel.getFromLocal();
         }
 
         @Override

@@ -1,6 +1,7 @@
 package com.tdn.apotik_kasir.ui.inventory;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,8 +11,8 @@ import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.data.local.RealmLiveResult;
 import com.tdn.data.repository.Repository;
 import com.tdn.data.service.ApiService;
-import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.ObatObject;
+import com.tdn.domain.serialize.req.ReqPenjualanTemp;
 import com.tdn.domain.serialize.res.ResponseAction;
 
 import java.util.List;
@@ -55,30 +56,49 @@ public class InventoryViewModel extends ViewModel {
         return listObats;
     }
 
-    public void setListObats(MutableLiveData<List<ObatObject>> listObats) {
-        this.listObats = listObats;
-    }
 
-    public void tambahCart(PenjualanTempModel tempModel) {
+    public void tambahCart(ObatObject o, String toString) {
+
         actionListener.onStart();
-        apiService.postTempPenjualan(tempModel).enqueue(new Callback<ResponseAction>() {
-            @Override
-            public void onResponse(Call<ResponseAction> call, Response<ResponseAction> response) {
-                if (cek(response.code())) {
-                    if (cek(response.body().getResponseCode())) {
-                        actionListener.onSuccess(response.body().getResponseMessage());
-                    } else {
-                        actionListener.onError(response.body().getResponseMessage());
+        ReqPenjualanTemp temp = new ReqPenjualanTemp();
+
+        if (toString != null) {
+            double jumlah = Double.parseDouble(toString);
+            if (jumlah <= Double.parseDouble(o.getDetailJumlah())) {
+                double harga = Double.parseDouble(o.getDetailHargaJual());
+                double total = harga * jumlah;
+
+                temp.setTempJumlah(toString);
+                temp.setTempId("");
+                temp.setTempIdStok(o.getDetailId());
+                temp.setTempTotal(String.valueOf(total));
+                Log.e("tes", temp.toString());
+                apiService.postTempPenjualan(temp).enqueue(new Callback<ResponseAction>() {
+                    @Override
+                    public void onResponse(Call<ResponseAction> call, Response<ResponseAction> response) {
+                        if (cek(response.code())) {
+                            if (cek(response.body().getResponseCode())) {
+                                actionListener.onSuccess(response.body().getResponseMessage());
+                            } else {
+                                actionListener.onError(response.body().getResponseMessage());
+                            }
+                        } else {
+                            actionListener.onError(response.message());
+                        }
                     }
-                } else {
-                    actionListener.onError(response.message());
-                }
+
+                    @Override
+                    public void onFailure(Call<ResponseAction> call, Throwable t) {
+                        actionListener.onError(t.getMessage());
+                    }
+                });
+
+            } else {
+                actionListener.onError("Stok tidak cukup!!");
             }
 
-            @Override
-            public void onFailure(Call<ResponseAction> call, Throwable t) {
-                actionListener.onError(t.getMessage());
-            }
-        });
+        } else {
+            actionListener.onError("Isi Jumlah!!");
+        }
     }
 }

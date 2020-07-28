@@ -10,15 +10,14 @@ import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.data.local.RealmLiveResult;
 import com.tdn.data.repository.Repository;
 import com.tdn.data.service.ApiService;
-import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.req.ReqPenjualan;
+import com.tdn.domain.serialize.req.ReqPenjualanTemp;
 import com.tdn.domain.serialize.res.ResponseAction;
 
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
