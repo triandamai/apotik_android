@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.tdn.domain.model.PenjualanModel;
 import com.tdn.domain.model.UserModel;
 
 public class MyUser {
@@ -14,6 +15,7 @@ public class MyUser {
             KEY_KOMENTAR = "komentar",
             KEY_LAPORAN = "laporan",
             KEY_USER = "userdata",
+            KEY_PENJUALAN = "transaksi",
             KEY_CHAT = "chat";
     private static MyUser myUser;
     private static SharedPreferences sharedPreferences;
@@ -49,8 +51,32 @@ public class MyUser {
     public UserModel getUser() {
         try {
             Gson gson = new Gson();
-            String json = sharedPreferences.getString(KEY_USER, "");
+            String json = sharedPreferences.getString(KEY_PENJUALAN, "");
             UserModel user = gson.fromJson(json, UserModel.class);
+            return user;
+        } catch (NullPointerException e) {
+            Log.e(TAG, e.getMessage().toString());
+            return null;
+        }
+    }
+
+    public void setLastPenjualan(PenjualanModel user) {
+        try {
+
+            Gson gson = new Gson();
+            editor.putString(KEY_USER, gson.toJson(user));
+            editor.apply();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage().toString());
+        }
+    }
+
+
+    public PenjualanModel getLastPenjualan() {
+        try {
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString(KEY_PENJUALAN, "");
+            PenjualanModel user = gson.fromJson(json, PenjualanModel.class);
             return user;
         } catch (NullPointerException e) {
             Log.e(TAG, e.getMessage().toString());

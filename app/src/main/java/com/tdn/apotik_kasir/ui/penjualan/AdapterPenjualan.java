@@ -48,6 +48,7 @@ public class AdapterPenjualan extends RecyclerView.Adapter<AdapterPenjualan.MyVi
         });
     }
 
+
     @Override
     public int getItemCount() {
         return obatObjectList == null ? 0 : obatObjectList.size();

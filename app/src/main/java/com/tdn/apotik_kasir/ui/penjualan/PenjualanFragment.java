@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.PenjualanFragmentBinding;
+import com.tdn.data.persistensi.MyUser;
+import com.tdn.domain.model.PenjualanModel;
 import com.tdn.domain.object.PenjualanObject;
 
 import java.util.List;
@@ -40,7 +43,9 @@ public class PenjualanFragment extends Fragment {
         mViewModel = new ViewModelProvider(this, new VMFactory(getContext())).get(PenjualanViewModel.class);
         binding.getRoot();
         adapterPenjualan = new AdapterPenjualan(getContext(), posisi -> {
-
+            PenjualanModel penjualanModel = (PenjualanModel) adapterPenjualan.getFromPosition(posisi).ToModel();
+            MyUser.getInstance(getContext()).setLastPenjualan(penjualanModel);
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.navigation_detail_penjualan);
         });
         binding.rv.setAdapter(adapterPenjualan);
         return binding.getRoot();

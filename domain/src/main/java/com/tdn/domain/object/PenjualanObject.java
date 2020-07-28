@@ -5,19 +5,16 @@ import com.google.gson.annotations.SerializedName;
 import com.tdn.domain.model.PenjualanModel;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class PenjualanObject extends RealmObject {
-    @SerializedName("penjualan_id")
-    @Expose
+    @PrimaryKey
     private String penjualanId;
-    @SerializedName("penjualan_id_transaksi")
-    @Expose
+
     private String penjualanIdTransaksi;
-    @SerializedName("penjualan_tanggal")
-    @Expose
+
     private String penjualanTanggal;
-    @SerializedName("penjualan_subtotal")
-    @Expose
+
     private String penjualanSubtotal;
 
     public String getPenjualanId() {
