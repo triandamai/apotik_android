@@ -38,6 +38,7 @@ public class PenjualanFragment extends Fragment {
         adapterPenjualan = new AdapterPenjualan(getContext(), posisi -> {
 
         });
+        binding.rv.setAdapter(adapterPenjualan);
         return binding.getRoot();
     }
 

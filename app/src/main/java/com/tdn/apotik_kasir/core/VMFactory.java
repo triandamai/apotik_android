@@ -13,6 +13,8 @@ import com.tdn.apotik_kasir.ui.home.HomeViewModel;
 import com.tdn.apotik_kasir.ui.inventory.InventoryViewModel;
 import com.tdn.apotik_kasir.ui.inventory.NewItemViewModel;
 import com.tdn.apotik_kasir.ui.notification.NotificationViewModel;
+import com.tdn.apotik_kasir.ui.penjualan.DetailPenjualanViewModel;
+import com.tdn.apotik_kasir.ui.penjualan.PenjualanViewModel;
 import com.tdn.apotik_kasir.ui.settings.SettingViewModel;
 import com.tdn.apotik_kasir.ui.suplier.SuplierViewModel;
 import com.tdn.apotik_kasir.ui.transaction.NewTransactionViewModel;
@@ -75,6 +77,10 @@ public class VMFactory implements ViewModelProvider.Factory {
             return (T) new NewTransactionViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(TransactionViewModel.class)) {
             return (T) new TransactionViewModel(context, actionListener);
+        } else if (modelClass.isAssignableFrom(DetailPenjualanViewModel.class)) {
+            return (T) new DetailPenjualanViewModel(context);
+        } else if (modelClass.isAssignableFrom(PenjualanViewModel.class)) {
+            return (T) new PenjualanViewModel(context);
         } else {
             throw new IllegalArgumentException("Unknown ViewModel class");
         }

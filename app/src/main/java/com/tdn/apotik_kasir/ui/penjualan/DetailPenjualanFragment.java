@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tdn.apotik_kasir.R;
+import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.DetailPenjualanFragmentBinding;
 
@@ -32,10 +33,11 @@ public class DetailPenjualanFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.detail_penjualan_fragment, container, false);
-        mViewModel = new ViewModelProvider(this).get(DetailPenjualanViewModel.class);
+        mViewModel = new ViewModelProvider(this, new VMFactory(getContext())).get(DetailPenjualanViewModel.class);
         adapterDetailPenjualan = new AdapterDetailPenjualan(getContext(), posisi -> {
 
         });
+        binding.rv.setAdapter(adapterDetailPenjualan);
         return binding.getRoot();
     }
 

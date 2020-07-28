@@ -119,7 +119,7 @@ public class Repository {
                 if (cek(response.code())) {
                     //Log.e(TAG, response.body().toString());
                     realm.beginTransaction();
-                    realm.delete(PenjualanTempObject.class);
+                    realm.delete(PenjualanObject.class);
                     realm.commitTransaction();
                     if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
 
@@ -149,18 +149,24 @@ public class Repository {
             public void onResponse(Call<ResponsePenjualanDetail> call, Response<ResponsePenjualanDetail> response) {
                 if (cek(response.code())) {
                     //Log.e(TAG, response.body().toString());
-                    realm.beginTransaction();
-                    realm.delete(PenjualanTempObject.class);
-                    realm.commitTransaction();
-                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
 
-                        for (PenjualanDetailModel data : response.body().getData()) {
-                            PenjualanDetailObject o = (PenjualanDetailObject) data.ToObject();
-                            realm.executeTransaction(realm -> {
-                                realm.copyToRealmOrUpdate(o);
-                            });
+                    if (cek(response.body().getResponseCode())) {
+                        realm.beginTransaction();
+                        realm.delete(PenjualanDetailObject.class);
+                        realm.commitTransaction();
+                        if (response.body().getData() != null) {
+
+                            for (PenjualanDetailModel data : response.body().getData()) {
+                                PenjualanDetailObject o = (PenjualanDetailObject) data.ToObject();
+                                realm.executeTransaction(realm -> {
+                                    realm.copyToRealmOrUpdate(o);
+                                });
+                            }
                         }
-
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(PenjualanDetailObject.class);
+                        realm.commitTransaction();
                     }
                 }
             }

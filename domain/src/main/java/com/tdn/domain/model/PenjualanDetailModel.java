@@ -14,15 +14,21 @@ public class PenjualanDetailModel extends BaseModel {
     @SerializedName("detail_obat_id")
     @Expose
     private String detailObatId;
-    @SerializedName("detail_obat")
-    @Expose
-    private String detailObat;
     @SerializedName("detail_jumlah")
     @Expose
     private String detailJumlah;
     @SerializedName("detail_harga")
     @Expose
     private String detailHarga;
+    @SerializedName("obat_id")
+    @Expose
+    private String obatId;
+    @SerializedName("obat_nama")
+    @Expose
+    private String obatNama;
+    @SerializedName("obat_stok")
+    @Expose
+    private String obatStok;
 
     public String getDetailId() {
         return detailId;
@@ -48,14 +54,6 @@ public class PenjualanDetailModel extends BaseModel {
         this.detailObatId = detailObatId;
     }
 
-    public String getDetailObat() {
-        return detailObat;
-    }
-
-    public void setDetailObat(String detailObat) {
-        this.detailObat = detailObat;
-    }
-
     public String getDetailJumlah() {
         return detailJumlah;
     }
@@ -72,15 +70,41 @@ public class PenjualanDetailModel extends BaseModel {
         this.detailHarga = detailHarga;
     }
 
+    public String getObatId() {
+        return obatId;
+    }
+
+    public void setObatId(String obatId) {
+        this.obatId = obatId;
+    }
+
+    public String getObatNama() {
+        return obatNama;
+    }
+
+    public void setObatNama(String obatNama) {
+        this.obatNama = obatNama;
+    }
+
+    public String getObatStok() {
+        return obatStok;
+    }
+
+    public void setObatStok(String obatStok) {
+        this.obatStok = obatStok;
+    }
+
     @Override
     public String toString() {
         return "PenjualanDetailModel{" +
                 "detailId='" + detailId + '\'' +
                 ", detailIdTransaksi='" + detailIdTransaksi + '\'' +
                 ", detailObatId='" + detailObatId + '\'' +
-                ", detailObat='" + detailObat + '\'' +
                 ", detailJumlah='" + detailJumlah + '\'' +
                 ", detailHarga='" + detailHarga + '\'' +
+                ", obatId='" + obatId + '\'' +
+                ", obatNama='" + obatNama + '\'' +
+                ", obatStok='" + obatStok + '\'' +
                 '}';
     }
 
@@ -91,8 +115,10 @@ public class PenjualanDetailModel extends BaseModel {
         o.setDetailId(detailId);
         o.setDetailIdTransaksi(detailIdTransaksi);
         o.setDetailJumlah(detailJumlah);
-        o.setDetailObat(detailObat);
         o.setDetailObatId(detailObatId);
+        o.setObatNama(obatNama);
+        o.setObatStok(obatStok);
+        o.setObatId(obatId);
         return o;
     }
 

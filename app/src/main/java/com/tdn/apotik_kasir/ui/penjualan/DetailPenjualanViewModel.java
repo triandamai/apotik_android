@@ -30,7 +30,7 @@ public class DetailPenjualanViewModel extends ViewModel {
     }
 
     private void getFromApi() {
-        Repository.getInstance(context).getPenjualan();
+        Repository.getInstance(context).getPenjualanDetail();
     }
 
     private void getFromLocal() {
