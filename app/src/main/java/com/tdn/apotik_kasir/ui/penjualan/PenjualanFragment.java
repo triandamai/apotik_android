@@ -16,12 +16,14 @@ import android.view.ViewGroup;
 
 import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.VMFactory;
+import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.PenjualanFragmentBinding;
 
 public class PenjualanFragment extends Fragment {
 
     private PenjualanViewModel mViewModel;
     private PenjualanFragmentBinding binding;
+    private AdapterPenjualan adapterPenjualan;
 
     public static PenjualanFragment newInstance() {
         return new PenjualanFragment();
@@ -33,6 +35,9 @@ public class PenjualanFragment extends Fragment {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.penjualan_fragment, container, false);
         mViewModel = new ViewModelProvider(this, new VMFactory(getContext())).get(PenjualanViewModel.class);
         binding.getRoot();
+        adapterPenjualan = new AdapterPenjualan(getContext(), posisi -> {
+
+        });
         return binding.getRoot();
     }
 

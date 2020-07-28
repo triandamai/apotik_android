@@ -13,6 +13,7 @@ import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.ItemObatBinding;
 import com.tdn.domain.object.ObatObject;
+import com.tdn.domain.object.PenjualanDetailObject;
 import com.tdn.domain.object.PenjualanObject;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AdapterDetailPenjualan extends RecyclerView.Adapter<AdapterDetailPenjualan.MyViewHolder> {
-    private List<PenjualanObject> obatObjectList = new ArrayList<>();
+    private List<PenjualanDetailObject> obatObjectList = new ArrayList<>();
     private Context context;
     private AdapterClicked adapterClicked;
 
@@ -38,7 +39,7 @@ public class AdapterDetailPenjualan extends RecyclerView.Adapter<AdapterDetailPe
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        PenjualanObject o = obatObjectList.get(position);
+        PenjualanDetailObject o = obatObjectList.get(position);
 //        holder.binding.tvNamaItem.setText(o.getObatNama());
 //        holder.binding.tvSatuanJual.setText("Harga : " + o.getObatJual());
 //        holder.binding.tvStok.setText("Stok : " + o.getObatStok());
@@ -53,7 +54,7 @@ public class AdapterDetailPenjualan extends RecyclerView.Adapter<AdapterDetailPe
         return obatObjectList == null ? 0 : obatObjectList.size();
     }
 
-    public void setData(List<PenjualanObject> TabunganModels) {
+    public void setData(List<PenjualanDetailObject> TabunganModels) {
         if (this.obatObjectList == null) {
             this.obatObjectList.addAll(TabunganModels);
         } else {
@@ -70,13 +71,13 @@ public class AdapterDetailPenjualan extends RecyclerView.Adapter<AdapterDetailPe
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    return AdapterDetailPenjualan.this.obatObjectList.get(oldItemPosition).getPenjualanId() == TabunganModels.get(newItemPosition).getPenjualanId();
+                    return AdapterDetailPenjualan.this.obatObjectList.get(oldItemPosition).getDetailId() == TabunganModels.get(newItemPosition).getDetailId();
                 }
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    PenjualanObject lama = TabunganModels.get(oldItemPosition);
-                    PenjualanObject baru = TabunganModels.get(newItemPosition);
+                    PenjualanDetailObject lama = TabunganModels.get(oldItemPosition);
+                    PenjualanDetailObject baru = TabunganModels.get(newItemPosition);
                     return lama == baru && Objects.equals(lama, baru);
                 }
             });
@@ -87,7 +88,7 @@ public class AdapterDetailPenjualan extends RecyclerView.Adapter<AdapterDetailPe
 
     }
 
-    public PenjualanObject getFromPosition(int posisi) {
+    public PenjualanDetailObject getFromPosition(int posisi) {
         return obatObjectList.get(posisi);
     }
 

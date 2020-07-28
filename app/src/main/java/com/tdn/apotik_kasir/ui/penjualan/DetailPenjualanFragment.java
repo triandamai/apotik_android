@@ -1,6 +1,7 @@
 package com.tdn.apotik_kasir.ui.penjualan;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -14,12 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tdn.apotik_kasir.R;
+import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.DetailPenjualanFragmentBinding;
 
 public class DetailPenjualanFragment extends Fragment {
 
     private DetailPenjualanViewModel mViewModel;
     private DetailPenjualanFragmentBinding binding;
+    private AdapterDetailPenjualan adapterDetailPenjualan;
 
     public static DetailPenjualanFragment newInstance() {
         return new DetailPenjualanFragment();
@@ -29,14 +32,12 @@ public class DetailPenjualanFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.detail_penjualan_fragment, container, false);
+        mViewModel = new ViewModelProvider(this).get(DetailPenjualanViewModel.class);
+        adapterDetailPenjualan = new AdapterDetailPenjualan(getContext(), posisi -> {
+
+        });
         return binding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(DetailPenjualanViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
 }

@@ -17,7 +17,7 @@ import io.realm.Realm;
 
 public class PenjualanViewModel extends ViewModel {
     // TODO: Implement the ViewModel
-    public LiveData<List<PenjualanModel>> penjualan;
+    public LiveData<List<PenjualanObject>> penjualan;
     private Realm realm;
     private Context context;
 
@@ -36,7 +36,7 @@ public class PenjualanViewModel extends ViewModel {
         this.penjualan = new RealmLiveResult(realm.where(PenjualanObject.class).findAll());
     }
 
-    public LiveData<List<PenjualanModel>> getPenjualan() {
+    public LiveData<List<PenjualanObject>> getPenjualan() {
         if (penjualan == null) {
             penjualan = new MutableLiveData<>();
         }
