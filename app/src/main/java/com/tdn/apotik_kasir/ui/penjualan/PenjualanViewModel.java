@@ -24,8 +24,9 @@ public class PenjualanViewModel extends ViewModel {
     public PenjualanViewModel(Context context) {
         this.context = context;
         this.realm = Realm.getDefaultInstance();
-        getFromLocal();
         getFromApi();
+        getFromLocal();
+
     }
 
     private void getFromApi() {

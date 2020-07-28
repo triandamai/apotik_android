@@ -1,6 +1,7 @@
 package com.tdn.apotik_kasir.ui.penjualan;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -18,6 +19,9 @@ import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.PenjualanFragmentBinding;
+import com.tdn.domain.object.PenjualanObject;
+
+import java.util.List;
 
 public class PenjualanFragment extends Fragment {
 
@@ -42,5 +46,19 @@ public class PenjualanFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        observe(mViewModel);
+    }
 
+    private void observe(PenjualanViewModel mViewModel) {
+        mViewModel.getPenjualan().observe(getViewLifecycleOwner(), penjualanObjects -> {
+            if (penjualanObjects != null) {
+                adapterPenjualan.setData(penjualanObjects);
+            } else {
+
+            }
+        });
+    }
 }

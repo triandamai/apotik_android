@@ -56,11 +56,11 @@
     <fragment
         android:id="@+id/navigation_penjualan"
         android:name="com.tdn.apotik_kasir.ui.penjualan.PenjualanFragment"
-        android:label="Tambahkan Suplier Baru"
+        android:label="Riwayat Penjualan"
         tools:layout="@layout/penjualan_fragment" />
     <fragment
         android:id="@+id/navigation_detail_penjualan"
         android:name="com.tdn.apotik_kasir.ui.penjualan.DetailPenjualanFragment"
-        android:label="Tambahkan Suplier Baru"
+        android:label="Detail Penjualan"
         tools:layout="@layout/detail_penjualan_fragment" />
 </navigation>

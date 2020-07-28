@@ -1,59 +1,58 @@
 package com.tdn.domain.serialize.res;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.tdn.domain.model.PenjualanModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseGetPenjualan{
-	private int responseCode;
-	private String responseMessage;
-	private List<PenjualanModel> data;
-	private boolean status;
+public class ResponseGetPenjualan {
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
+    @SerializedName("response_code")
+    @Expose
+    private Integer responseCode;
+    @SerializedName("response_message")
+    @Expose
+    private String responseMessage;
+    @SerializedName("data")
+    @Expose
+    private List<PenjualanModel> data = null;
 
-	public void setResponseCode(int responseCode){
-		this.responseCode = responseCode;
-	}
+    public Boolean getStatus() {
+        return status;
+    }
 
-	public int getResponseCode(){
-		return responseCode;
-	}
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-	public void setResponseMessage(String responseMessage){
-		this.responseMessage = responseMessage;
-	}
+    public Integer getResponseCode() {
+        return responseCode;
+    }
 
-	public String getResponseMessage(){
-		return responseMessage;
-	}
+    public void setResponseCode(Integer responseCode) {
+        this.responseCode = responseCode;
+    }
 
-	public void setData(List<PenjualanModel> data){
-		this.data = data;
-	}
+    public String getResponseMessage() {
+        return responseMessage;
+    }
 
-	public List<PenjualanModel> getData(){
-		if(data == null){
-			data = new ArrayList<>();
-		}
-		return data;
-	}
+    public void setResponseMessage(String responseMessage) {
+        this.responseMessage = responseMessage;
+    }
 
-	public void setStatus(boolean status){
-		this.status = status;
-	}
+    public List<PenjualanModel> getData() {
+        return data;
+    }
 
-	public boolean isStatus(){
-		return status;
-	}
+    public void setData(List<PenjualanModel> data) {
+        this.data = data;
+    }
 
-	@Override
- 	public String toString(){
-		return 
-			"ResponseGetPenjualan{" + 
-			"response_code = '" + responseCode + '\'' + 
-			",response_message = '" + responseMessage + '\'' + 
-			",data = '" + data + '\'' + 
-			",status = '" + status + '\'' + 
-			"}";
-		}
 }
+
+

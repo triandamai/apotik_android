@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,7 @@ public class TransactionFragment extends Fragment {
                 binding.tvTotal.setText("Total Rp " + total);
                 total = total;
             } else {
-
+                adapterTransaction.notifyDataSetChanged();
             }
         });
 
@@ -103,8 +104,8 @@ public class TransactionFragment extends Fragment {
         @Override
         public void onSuccess(@NonNull String message) {
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
-            mViewModel.getFromApi();
-            mViewModel.getFromLocal();
+
+            Navigation.findNavController(binding.getRoot()).navigate(R.id.navigation_penjualan);
         }
 
         @Override

@@ -39,9 +39,9 @@ public class AdapterPenjualan extends RecyclerView.Adapter<AdapterPenjualan.MyVi
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualan.MyViewHolder holder, int position) {
         PenjualanObject o = obatObjectList.get(position);
-//        holder.binding.tvNamaItem.setText(o.getObatNama());
-//        holder.binding.tvSatuanJual.setText("Harga : " + o.getObatJual());
-//        holder.binding.tvStok.setText("Stok : " + o.getObatStok());
+        holder.binding.tvNamaItem.setText(o.getPenjualanIdTransaksi());
+        holder.binding.tvSatuanJual.setText(o.getPenjualanTanggal());
+        holder.binding.tvStok.setText("Rp" + o.getPenjualanSubtotal());
         holder.binding.lyItem.setOnClickListener(view -> {
 
             adapterClicked.onClick(position);

@@ -244,7 +244,25 @@ public class PenjualanTempModel extends BaseModel {
     @Override
     public Object ToObject() {
         PenjualanTempObject o = new PenjualanTempObject();
-
+        o.setTempTotalharga(tempTotalharga);
+        o.setTempJumlah(tempJumlah);
+        o.setTempId(tempId);
+        o.setTempIdStok(tempIdStok);
+        o.setDetailDiskon(detailDiskon);
+        o.setDetailExpired(detailExpired);
+        o.setDetailHarga(detailHarga);
+        o.setDetailHargaBeli(detailHargaBeli);
+        o.setDetailHargaJual(detailHargaJual);
+        o.setDetailId(detailId);
+        o.setDetailIdTransaksi(detailIdTransaksi);
+        o.setDetailJumlah(detailJumlah);
+        o.setDetailObatId(obatId);
+        o.setDetailSatuanBeli(detailSatuanBeli);
+        o.setDetailTanggalTerima(detailTanggalTerima);
+        o.setJmlUpdate(jmlUpdate);
+        o.setObatId(obatId);
+        o.setObatNama(obatNama);
+        o.setObatStok(obatStok);
 
         return o;
     }

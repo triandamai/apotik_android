@@ -86,21 +86,38 @@ public class Repository {
             @Override
             public void onResponse(Call<ResponseGetPenjualanTemp> call, Response<ResponseGetPenjualanTemp> response) {
                 if (cek(response.code())) {
-                    //Log.e(TAG, response.body().toString());
-                    realm.beginTransaction();
-                    realm.delete(PenjualanTempObject.class);
-                    realm.commitTransaction();
-                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+                    if (cek(response.body().getResponseCode())) {
+                        realm.beginTransaction();
+                        realm.delete(PenjualanTempObject.class);
+                        realm.commitTransaction();
+                        if (response.body().getData() != null) {
+                            if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
 
-                        for (PenjualanTempModel data : response.body().getData()) {
-                            PenjualanTempObject o = (PenjualanTempObject) data.ToObject();
-                            realm.executeTransaction(realm -> {
-                                realm.copyToRealmOrUpdate(o);
-                            });
+
+                                for (PenjualanTempModel data : response.body().getData()) {
+                                    PenjualanTempObject o = (PenjualanTempObject) data.ToObject();
+                                    realm.executeTransaction(realm -> {
+                                        realm.copyToRealmOrUpdate(o);
+                                    });
+                                }
+                            } else {
+                                realm.beginTransaction();
+                                realm.delete(PenjualanTempObject.class);
+                                realm.commitTransaction();
+                            }
+                        } else {
+                            realm.beginTransaction();
+                            realm.delete(PenjualanTempObject.class);
+                            realm.commitTransaction();
                         }
-
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(PenjualanTempObject.class);
+                        realm.commitTransaction();
                     }
+
                 }
+
             }
 
             @Override
@@ -117,19 +134,31 @@ public class Repository {
             @Override
             public void onResponse(Call<ResponseGetPenjualan> call, Response<ResponseGetPenjualan> response) {
                 if (cek(response.code())) {
-                    //Log.e(TAG, response.body().toString());
-                    realm.beginTransaction();
-                    realm.delete(PenjualanObject.class);
-                    realm.commitTransaction();
-                    if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
 
-                        for (PenjualanModel data : response.body().getData()) {
-                            PenjualanObject o = (PenjualanObject) data.ToObject();
-                            realm.executeTransaction(realm -> {
-                                realm.copyToRealmOrUpdate(o);
-                            });
+                    if (cek(response.body().getResponseCode())) {
+                        realm.beginTransaction();
+                        realm.delete(PenjualanObject.class);
+                        realm.commitTransaction();
+                        if (response.body().getData() != null) {
+                            if (cek(response.body().getResponseCode()) || response.body().getData().size() >= 1) {
+
+                                for (PenjualanModel data : response.body().getData()) {
+                                    PenjualanObject o = (PenjualanObject) data.ToObject();
+                                    realm.executeTransaction(realm -> {
+                                        realm.copyToRealmOrUpdate(o);
+                                    });
+                                }
+
+                            }
+                        } else {
+                            realm.beginTransaction();
+                            realm.delete(PenjualanObject.class);
+                            realm.commitTransaction();
                         }
-
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(PenjualanObject.class);
+                        realm.commitTransaction();
                     }
                 }
             }

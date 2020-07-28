@@ -34,18 +34,7 @@
                     app:shimmer_recycler_item_count="5"
                     app:shimmer_recycler_layout="@layout/item_shimmer" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_logout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="SELESAI"
-                    android:visibility="gone"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="?actionBarSize"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:layout_marginEnd="@dimen/dp_16"
-                    android:textColor="@color/putih"
-                    android:background="@color/colorPrimary" />
+
             </RelativeLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
