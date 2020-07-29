@@ -4,14 +4,17 @@ import android.content.Context;
 import android.util.Log;
 
 import com.tdn.data.service.ApiService;
+import com.tdn.domain.model.HomeModel;
 import com.tdn.domain.model.ObatModel;
 import com.tdn.domain.model.PenjualanDetailModel;
 import com.tdn.domain.model.PenjualanModel;
 import com.tdn.domain.model.PenjualanTempModel;
+import com.tdn.domain.object.HomeObject;
 import com.tdn.domain.object.ObatObject;
 import com.tdn.domain.object.PenjualanDetailObject;
 import com.tdn.domain.object.PenjualanObject;
 import com.tdn.domain.object.PenjualanTempObject;
+import com.tdn.domain.serialize.res.ResponseGetHome;
 import com.tdn.domain.serialize.res.ResponseGetObat;
 import com.tdn.domain.serialize.res.ResponseGetPenjualan;
 import com.tdn.domain.serialize.res.ResponseGetPenjualanTemp;
@@ -218,5 +221,50 @@ public class Repository {
         });
     }
 
+    public void getHome() {
+        service.getHome().enqueue(new Callback<ResponseGetHome>() {
+            @Override
+            public void onResponse(Call<ResponseGetHome> call, Response<ResponseGetHome> response) {
+                if (cek(response.code())) {
+                    //Log.e(TAG, response.body().toString());
+
+                    if (cek(response.body().getResponseCode())) {
+                        realm.beginTransaction();
+                        realm.delete(HomeObject.class);
+                        realm.commitTransaction();
+                        if (response.body().getData() != null) {
+                            if (cek(response.body().getResponseCode())) {
+
+
+                                HomeObject o = (HomeObject) response.body().getData().ToObject();
+                                realm.executeTransaction(realm -> {
+                                    realm.copyToRealmOrUpdate(o);
+                                });
+
+                            } else {
+                                realm.beginTransaction();
+                                realm.delete(HomeObject.class);
+                                realm.commitTransaction();
+                            }
+                        } else {
+                            realm.beginTransaction();
+                            realm.delete(HomeObject.class);
+                            realm.commitTransaction();
+                        }
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(HomeObject.class);
+                        realm.commitTransaction();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetHome> call, Throwable t) {
+
+            }
+        });
+
+    }
 
 }
