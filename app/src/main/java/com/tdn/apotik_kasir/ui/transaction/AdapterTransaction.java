@@ -91,6 +91,10 @@ public class AdapterTransaction extends RecyclerView.Adapter<AdapterTransaction.
 
     }
 
+    public PenjualanTempObject getFromPosition(int p) {
+        return penjualanTempModels.get(p);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private ItemTempBinding binding;
 

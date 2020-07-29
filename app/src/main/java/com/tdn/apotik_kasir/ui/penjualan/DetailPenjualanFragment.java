@@ -19,6 +19,7 @@ import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.DetailPenjualanFragmentBinding;
+import com.tdn.data.persistensi.MyUser;
 import com.tdn.domain.object.PenjualanDetailObject;
 
 import java.util.List;
@@ -55,6 +56,10 @@ public class DetailPenjualanFragment extends Fragment {
         mViewModel.getPenjualan().observe(getViewLifecycleOwner(), penjualanDetailObjects -> {
             if (penjualanDetailObjects != null) {
                 adapterDetailPenjualan.setData(penjualanDetailObjects);
+                if (penjualanDetailObjects.size() > 0) {
+                    binding.tvId.setText(MyUser.getInstance(getContext()).getLastPenjualan().getPenjualanIdTransaksi());
+                    binding.tvTotal.setText(MyUser.getInstance(getContext()).getLastPenjualan().getPenjualanSubtotal());
+                }
             } else {
 
             }

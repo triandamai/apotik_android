@@ -10,6 +10,7 @@ import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.data.local.RealmLiveResult;
 import com.tdn.data.repository.Repository;
 import com.tdn.data.service.ApiService;
+import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.req.ReqPenjualan;
 import com.tdn.domain.serialize.req.ReqPenjualanTemp;
@@ -77,5 +78,11 @@ public class TransactionViewModel extends ViewModel {
                 actionListener.onError(t.getMessage());
             }
         });
+    }
+
+    public void update(PenjualanTempModel m) {
+    }
+
+    public void hapus(PenjualanTempModel m) {
     }
 }

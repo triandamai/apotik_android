@@ -6,31 +6,24 @@ import com.tdn.domain.model.BaseModel;
 import com.tdn.domain.model.PenjualanDetailModel;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class PenjualanDetailObject extends RealmObject {
-    @SerializedName("detail_id")
-    @Expose
+    @PrimaryKey
     private String detailId;
-    @SerializedName("detail_id_transaksi")
-    @Expose
+
     private String detailIdTransaksi;
-    @SerializedName("detail_obat_id")
-    @Expose
+
     private String detailObatId;
-    @SerializedName("detail_jumlah")
-    @Expose
+
     private String detailJumlah;
-    @SerializedName("detail_harga")
-    @Expose
+
     private String detailHarga;
-    @SerializedName("obat_id")
-    @Expose
+
     private String obatId;
-    @SerializedName("obat_nama")
-    @Expose
+
     private String obatNama;
-    @SerializedName("obat_stok")
-    @Expose
+
     private String obatStok;
 
     public String getDetailId() {

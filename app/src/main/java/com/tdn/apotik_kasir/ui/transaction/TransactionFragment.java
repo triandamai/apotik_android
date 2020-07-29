@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -22,6 +25,7 @@ import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.FragmentTransactionBinding;
+import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.req.ReqPenjualan;
 import com.tdn.domain.serialize.req.ReqPenjualanTemp;
@@ -93,7 +97,20 @@ public class TransactionFragment extends Fragment {
     }
 
     private AdapterClicked adapterClicked = posisi -> {
-
+        PenjualanTempModel m = (PenjualanTempModel) adapterTransaction.getFromPosition(posisi).ToModel();
+        EditText input = new EditText(getContext());
+        input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        input.setText(m.getTempJumlah());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Ubah " + m.getObatNama() + " ?");
+        builder.setPositiveButton("Simpan", (dialogInterface, i) -> {
+            mViewModel.update(m);
+        });
+        builder.setNegativeButton("Hapus", (dialogInterface, i) -> {
+            mViewModel.hapus(m);
+        });
+        builder.create();
+        builder.show();
     };
     private ActionListener actionListener = new ActionListener() {
         @Override
