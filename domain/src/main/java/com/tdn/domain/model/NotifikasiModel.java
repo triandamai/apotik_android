@@ -2,6 +2,7 @@ package com.tdn.domain.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.tdn.domain.object.NotifikasiObject;
 
 public class NotifikasiModel extends BaseModel {
     @SerializedName("id_notif")
@@ -31,6 +32,9 @@ public class NotifikasiModel extends BaseModel {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("message")
+    @Expose
+    private String message;
 
     public String getIdNotif() {
         return idNotif;
@@ -104,6 +108,14 @@ public class NotifikasiModel extends BaseModel {
         this.status = status;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     @Override
     public String toString() {
         return "NotifikasiModel{" +
@@ -116,11 +128,23 @@ public class NotifikasiModel extends BaseModel {
                 ", obatId='" + obatId + '\'' +
                 ", supplier='" + supplier + '\'' +
                 ", status='" + status + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 
     @Override
     public Object ToObject() {
-        return null;
+        NotifikasiObject o = new NotifikasiObject();
+        o.setIdNotif(idNotif);
+        o.setExpiredDate(expiredDate);
+        o.setExpiredDay(expiredDay);
+        o.setObat(obat);
+        o.setObatId(obatId);
+        o.setStatus(status);
+        o.setStokMinimal(stokMinimal);
+        o.setStokObat(stokObat);
+        o.setSupplier(supplier);
+        o.setMessage(message);
+        return o;
     }
 }
