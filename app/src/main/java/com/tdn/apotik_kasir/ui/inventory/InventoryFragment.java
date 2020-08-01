@@ -65,6 +65,7 @@ public class InventoryFragment extends Fragment {
         binding.rv.setAdapter(adapterInventory);
         binding.swipe.setOnRefreshListener(() -> {
             mViewModel.getFromApi();
+            mViewModel.getFromLocal();
             new Handler().postDelayed(() -> {
                 binding.swipe.setRefreshing(false);
             }, 1000);
@@ -83,6 +84,7 @@ public class InventoryFragment extends Fragment {
         mViewModel.getListObats().observe(getViewLifecycleOwner(), obatObjects -> {
             if (obatObjects != null) {
                 adapterInventory.setData(obatObjects);
+                adapterInventory.notifyDataSetChanged();
             } else {
                 Snackbar.make(binding.getRoot(), "Gagal Ambil Data.", BaseTransientBottomBar.LENGTH_LONG).show();
             }

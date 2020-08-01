@@ -68,7 +68,7 @@ public class VMFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(NewItemViewModel.class)) {
             return (T) new NewItemViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(NotificationViewModel.class)) {
-            return (T) new NotificationViewModel(context, actionListener);
+            return (T) new NotificationViewModel(context);
         } else if (modelClass.isAssignableFrom(SettingViewModel.class)) {
             return (T) new SettingViewModel(context, actionListener);
         } else if (modelClass.isAssignableFrom(SuplierViewModel.class)) {

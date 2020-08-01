@@ -28,16 +28,7 @@ public class SplashScreen extends AppCompatActivity {
             startActivity(new Intent(SplashScreen.this, LoginActivity.class));
             finish();
         }
-        HomeObject o = new HomeObject();
-        o.setAlamatApotek("ALamat");
-        o.setNamaApotek("Kadede Farma ");
-        o.setNotifikasiExpired("a");
-        o.setPembelian(0);
-        o.setPenjualan(0);
-        o.setStokMinimal("2");
-        o.setId(1);
-        realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm -> realm.copyToRealmOrUpdate(o));
+
 
     }
 }

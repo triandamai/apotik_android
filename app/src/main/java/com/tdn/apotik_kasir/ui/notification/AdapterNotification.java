@@ -16,11 +16,12 @@ import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.ItemNotifikasiBinding;
 import com.tdn.domain.object.NotifikasiObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AdapterNotification extends RecyclerView.Adapter<AdapterNotification.MyViewHolder> {
-    private List<NotifikasiObject> notifikasiObjectList;
+    private List<NotifikasiObject> notifikasiObjectList = new ArrayList<>();
     private Context context;
     private AdapterClicked adapterClicked;
 
@@ -80,6 +81,8 @@ public class AdapterNotification extends RecyclerView.Adapter<AdapterNotificatio
                     return lama == baru && Objects.equals(lama, baru);
                 }
             });
+            this.notifikasiObjectList = TabunganModels;
+            result.dispatchUpdatesTo(this);
         }
 
     }

@@ -41,6 +41,7 @@ public class HomeViewModel extends ViewModel {
     public LiveData<HomeObject> getHomeObjectLiveData() {
         if (homeObjectLiveData == null) {
             homeObjectLiveData = new MutableLiveData<>();
+
         }
         return homeObjectLiveData;
     }
