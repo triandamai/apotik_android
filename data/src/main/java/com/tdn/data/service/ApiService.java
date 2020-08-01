@@ -8,6 +8,7 @@ import com.tdn.domain.serialize.req.ReqPenjualanTemp;
 import com.tdn.domain.serialize.res.ResponseAction;
 import com.tdn.domain.serialize.res.ResponseAuth;
 import com.tdn.domain.serialize.res.ResponseGetHome;
+import com.tdn.domain.serialize.res.ResponseGetNotifikasi;
 import com.tdn.domain.serialize.res.ResponseGetObat;
 import com.tdn.domain.serialize.res.ResponseGetPenjualan;
 import com.tdn.domain.serialize.res.ResponseGetPenjualanTemp;
@@ -83,6 +84,10 @@ public interface ApiService {
     @Headers({accept_json, content_type, api_key})
     @GET("home")
     Call<ResponseGetHome> getHome();
+
+    @Headers({accept_json, content_type, api_key})
+    @GET("notifikasi")
+    Call<ResponseGetNotifikasi> getNotifikasi();
 
     class Factory {
         public static ApiService create() {

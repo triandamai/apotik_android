@@ -5,16 +5,19 @@ import android.util.Log;
 
 import com.tdn.data.service.ApiService;
 import com.tdn.domain.model.HomeModel;
+import com.tdn.domain.model.NotifikasiModel;
 import com.tdn.domain.model.ObatModel;
 import com.tdn.domain.model.PenjualanDetailModel;
 import com.tdn.domain.model.PenjualanModel;
 import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.HomeObject;
+import com.tdn.domain.object.NotifikasiObject;
 import com.tdn.domain.object.ObatObject;
 import com.tdn.domain.object.PenjualanDetailObject;
 import com.tdn.domain.object.PenjualanObject;
 import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.res.ResponseGetHome;
+import com.tdn.domain.serialize.res.ResponseGetNotifikasi;
 import com.tdn.domain.serialize.res.ResponseGetObat;
 import com.tdn.domain.serialize.res.ResponseGetPenjualan;
 import com.tdn.domain.serialize.res.ResponseGetPenjualanTemp;
@@ -261,6 +264,53 @@ public class Repository {
 
             @Override
             public void onFailure(Call<ResponseGetHome> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void getNotifikasi() {
+        service.getNotifikasi().enqueue(new Callback<ResponseGetNotifikasi>() {
+            @Override
+            public void onResponse(Call<ResponseGetNotifikasi> call, Response<ResponseGetNotifikasi> response) {
+                if (cek(response.code())) {
+                    //Log.e(TAG, response.body().toString());
+
+                    if (cek(response.body().getResponseCode())) {
+                        realm.beginTransaction();
+                        realm.delete(NotifikasiObject.class);
+                        realm.commitTransaction();
+                        if (response.body().getData() != null) {
+                            if (cek(response.body().getResponseCode())) {
+
+                                for (NotifikasiModel item : response.body().getData()) {
+                                    NotifikasiObject o = (NotifikasiObject) item.ToObject();
+                                    realm.executeTransaction(realm -> {
+                                        realm.copyToRealmOrUpdate(o);
+                                    });
+                                }
+
+                            } else {
+                                realm.beginTransaction();
+                                realm.delete(NotifikasiObject.class);
+                                realm.commitTransaction();
+                            }
+                        } else {
+                            realm.beginTransaction();
+                            realm.delete(NotifikasiObject.class);
+                            realm.commitTransaction();
+                        }
+                    } else {
+                        realm.beginTransaction();
+                        realm.delete(NotifikasiObject.class);
+                        realm.commitTransaction();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseGetNotifikasi> call, Throwable t) {
 
             }
         });
