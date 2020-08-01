@@ -46,11 +46,11 @@ public class HomeViewModel extends ViewModel {
         return homeObjectLiveData;
     }
 
-    private void getFromLocal() {
+    public void getFromLocal() {
         this.homeObjectLiveData = new RealmLiveObject(realm.where(HomeObject.class).findFirst());
     }
 
-    private void getFromApi() {
+    public void getFromApi() {
         Repository.getInstance(context).getHome();
     }
     // TODO: Implement the ViewModel

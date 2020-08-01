@@ -10,7 +10,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +38,13 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_home, container, false);
         mViewModel = new ViewModelProvider(this, new VMFactory(getContext(), actionListener)).get(HomeViewModel.class);
+        binding.swipe.setOnRefreshListener(() -> {
+            mViewModel.getFromApi();
+            new Handler().postDelayed(() -> {
+                mViewModel.getFromLocal();
+                binding.swipe.setRefreshing(false);
+            }, 1000);
+        });
         return binding.getRoot();
     }
 

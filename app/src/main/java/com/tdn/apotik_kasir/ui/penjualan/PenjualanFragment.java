@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,13 @@ public class PenjualanFragment extends Fragment {
             Navigation.findNavController(binding.getRoot()).navigate(R.id.navigation_detail_penjualan);
         });
         binding.rv.setAdapter(adapterPenjualan);
+        binding.swipe.setOnRefreshListener(() -> {
+            mViewModel.getFromApi();
+            new Handler().postDelayed(() -> {
+                mViewModel.getFromLocal();
+                binding.swipe.setRefreshing(false);
+            }, 1000);
+        });
         return binding.getRoot();
     }
 

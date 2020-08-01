@@ -27,11 +27,11 @@ public class NotificationViewModel extends ViewModel {
         getFromLocal();
     }
 
-    private void getFromLocal() {
+    public void getFromLocal() {
         this.notifikasiObjectLiveData = new RealmLiveResult(realm.where(NotifikasiObject.class).findAll());
     }
 
-    private void getFromApi() {
+    public void getFromApi() {
         Repository.getInstance(context).getNotifikasi();
     }
 

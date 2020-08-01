@@ -29,11 +29,11 @@ public class PenjualanViewModel extends ViewModel {
 
     }
 
-    private void getFromApi() {
+    public void getFromApi() {
         Repository.getInstance(context).getPenjualan();
     }
 
-    private void getFromLocal() {
+    public void getFromLocal() {
         this.penjualan = new RealmLiveResult(realm.where(PenjualanObject.class).findAll());
     }
 
