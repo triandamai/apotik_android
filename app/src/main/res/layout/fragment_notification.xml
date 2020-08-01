@@ -28,9 +28,12 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="@dimen/dp_16"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginBottom="@dimen/dp_10"
                     android:text="Notifikasi" />
+
 
                 <com.todkars.shimmer.ShimmerRecyclerView
                     android:id="@+id/rv"

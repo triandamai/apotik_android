@@ -1,6 +1,7 @@
 package com.tdn.apotik_kasir.ui.home;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -18,6 +19,8 @@ import com.tdn.apotik_kasir.R;
 import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.apotik_kasir.databinding.FragmentHomeBinding;
+import com.tdn.data.persistensi.MyUser;
+import com.tdn.domain.object.HomeObject;
 
 public class HomeFragment extends Fragment {
 
@@ -34,6 +37,22 @@ public class HomeFragment extends Fragment {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_home, container, false);
         mViewModel = new ViewModelProvider(this, new VMFactory(getContext(), actionListener)).get(HomeViewModel.class);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        observe(mViewModel);
+    }
+
+    private void observe(HomeViewModel mViewModel) {
+        mViewModel.getHomeObjectLiveData().observe(getViewLifecycleOwner(), homeObject -> {
+            if (homeObject != null) {
+                binding.jmlPembelian.setText("" + homeObject.getPembelian());
+                binding.jumlahPenjualan.setText("" + homeObject.getPenjualan());
+                binding.tvNamaAdmin.setText("" + MyUser.getInstance(getContext()).getUser().getUserNama());
+            }
+        });
     }
 
     private ActionListener actionListener = new ActionListener() {

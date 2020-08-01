@@ -93,7 +93,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/jml_aktif"
+                                    android:id="@+id/jml_pembelian"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -107,7 +107,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:textAlignment="center"
-                                    android:text="Obat" />
+                                    android:text="Pembelian" />
 
                             </LinearLayout>
 
@@ -146,7 +146,7 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/jumlah_nonaktif"
+                                    android:id="@+id/jumlah_penjualan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -160,7 +160,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:textAlignment="center"
-                                    android:text="Suplier" />
+                                    android:text="Penjualan" />
 
                             </LinearLayout>
 
