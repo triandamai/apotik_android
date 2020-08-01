@@ -26,7 +26,8 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String BASE = "http://192.168.100.132/apotekk/";
+    //    String BASE = "http://192.168.100.132/apotekk/";
+    String BASE = "http://kadede-farma.000webhostapp.com/";
     String BASE_URL = BASE + "api/v1/";
     String BASE_URL_IMAGE = BASE + "assets/pengaduan/";
     String USER_KEY = "";

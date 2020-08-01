@@ -25,6 +25,7 @@ import com.tdn.apotik_kasir.core.VMFactory;
 import com.tdn.apotik_kasir.core.callback.ActionListener;
 import com.tdn.apotik_kasir.core.callback.AdapterClicked;
 import com.tdn.apotik_kasir.databinding.FragmentTransactionBinding;
+import com.tdn.data.persistensi.MyUser;
 import com.tdn.domain.model.PenjualanTempModel;
 import com.tdn.domain.object.PenjualanTempObject;
 import com.tdn.domain.serialize.req.ReqPenjualan;
@@ -60,7 +61,7 @@ public class TransactionFragment extends Fragment {
             builder.setPositiveButton("Selesai", (dialogInterface, i) -> {
 
                 ReqPenjualan reqPenjualanTemp = new ReqPenjualan();
-                reqPenjualanTemp.setSubtotal(total);
+                reqPenjualanTemp.setSubtotal(MyUser.getInstance(getContext()).getTotal());
                 mViewModel.savepenjualan(reqPenjualanTemp);
             });
 
@@ -88,7 +89,8 @@ public class TransactionFragment extends Fragment {
                     total = total + jml;
                 }
                 binding.tvTotal.setText("Total Rp " + total);
-                total = total;
+
+                MyUser.getInstance(getContext()).setTotal(String.valueOf(total));
             } else {
                 adapterTransaction.notifyDataSetChanged();
             }
@@ -130,5 +132,11 @@ public class TransactionFragment extends Fragment {
             Snackbar.make(binding.getRoot(), message, BaseTransientBottomBar.LENGTH_LONG).show();
         }
     };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MyUser.getInstance(getContext()).setTotal("0");
+    }
 
 }

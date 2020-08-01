@@ -16,6 +16,7 @@ public class MyUser {
             KEY_LAPORAN = "laporan",
             KEY_USER = "userdata",
             KEY_PENJUALAN = "transaksi",
+            KEY_TOTAL = "total",
             KEY_CHAT = "chat";
     private static MyUser myUser;
     private static SharedPreferences sharedPreferences;
@@ -91,6 +92,29 @@ public class MyUser {
     public void setId(String key, String val) {
         editor.putString(key, val);
         editor.apply();
+    }
+
+    public void setTotal(String user) {
+        try {
+
+            Gson gson = new Gson();
+            editor.putString(KEY_TOTAL, gson.toJson(user));
+            editor.apply();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage().toString());
+        }
+    }
+
+
+    public String getTotal() {
+        try {
+            Gson gson = new Gson();
+            String json = sharedPreferences.getString(KEY_TOTAL, "");
+            return json;
+        } catch (NullPointerException e) {
+            Log.e(TAG, e.getMessage().toString());
+            return null;
+        }
     }
 
     public void resetId(String key) {

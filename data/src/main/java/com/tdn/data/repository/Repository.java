@@ -81,10 +81,6 @@ public class Repository {
                             realm.commitTransaction();
                         }
 
-                    } else {
-                        realm.beginTransaction();
-                        realm.delete(ObatObject.class);
-                        realm.commitTransaction();
                     }
                 }
             }
